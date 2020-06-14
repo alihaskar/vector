@@ -355,8 +355,7 @@ fn reconnect() {
 #[test]
 fn healthcheck() {
     let addr = next_addr();
-    let rt = vector::test_util::runtime();
-    let resolver = vector::dns::Resolver::new(Vec::new(), rt.executor()).unwrap();
+    let resolver = vector::dns::Resolver;
 
     let _listener = TcpListener::bind(&addr).unwrap();
 

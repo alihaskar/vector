@@ -5969,7 +5969,6 @@ dependencies = [
  "tracing-tower",
  "trust-dns",
  "trust-dns-proto",
- "trust-dns-resolver",
  "trust-dns-server",
  "typetag",
  "url 1.7.2",

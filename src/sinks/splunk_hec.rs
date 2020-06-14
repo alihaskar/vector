@@ -628,7 +628,7 @@ mod integration_tests {
     #[test]
     fn splunk_healthcheck() {
         let mut rt = runtime();
-        let resolver = crate::dns::Resolver::new(Vec::new(), rt.executor()).unwrap();
+        let resolver = crate::dns::Resolver;
 
         // OK
         {

@@ -669,7 +669,6 @@ mod tests {
         dns::Resolver,
         event::{self, Event, Value},
         region::RegionOrEndpoint,
-        test_util::runtime,
     };
     use std::collections::HashMap;
     use std::convert::{TryFrom, TryInto};
@@ -769,8 +768,7 @@ mod tests {
             stream: "stream".into(),
             group: "group".into(),
         };
-        let rt = runtime();
-        let resolver = Resolver::new(Vec::new(), rt.executor()).unwrap();
+        let resolver = Resolver;
         CloudwatchLogsSvc::new(&config, &key, resolver).unwrap()
     }
 
@@ -859,7 +857,7 @@ mod integration_tests {
     #[test]
     fn cloudwatch_insert_log_event() {
         let mut rt = runtime();
-        let resolver = Resolver::new(Vec::new(), rt.executor()).unwrap();
+        let resolver = Resolver;
 
         let stream_name = gen_name();
 
@@ -914,7 +912,7 @@ mod integration_tests {
     #[test]
     fn cloudwatch_insert_log_events_sorted() {
         let mut rt = runtime();
-        let resolver = Resolver::new(Vec::new(), rt.executor()).unwrap();
+        let resolver = Resolver;
 
         let stream_name = gen_name();
 
@@ -987,7 +985,7 @@ mod integration_tests {
     #[test]
     fn cloudwatch_insert_out_of_range_timestamp() {
         let mut rt = runtime();
-        let resolver = Resolver::new(Vec::new(), rt.executor()).unwrap();
+        let resolver = Resolver;
 
         let stream_name = gen_name();
 
@@ -1066,7 +1064,7 @@ mod integration_tests {
     #[test]
     fn cloudwatch_dynamic_group_and_stream_creation() {
         let mut rt = runtime();
-        let resolver = Resolver::new(Vec::new(), rt.executor()).unwrap();
+        let resolver = Resolver;
 
         let group_name = gen_name();
         let stream_name = gen_name();
@@ -1121,7 +1119,7 @@ mod integration_tests {
     #[test]
     fn cloudwatch_insert_log_event_batched() {
         let mut rt = runtime();
-        let resolver = Resolver::new(Vec::new(), rt.executor()).unwrap();
+        let resolver = Resolver;
 
         let group_name = gen_name();
         let stream_name = gen_name();
@@ -1181,7 +1179,7 @@ mod integration_tests {
     fn cloudwatch_insert_log_event_partitioned() {
         crate::test_util::trace_init();
         let mut rt = runtime();
-        let resolver = Resolver::new(Vec::new(), rt.executor()).unwrap();
+        let resolver = Resolver;
 
         let stream_name = gen_name();
 
@@ -1293,14 +1291,14 @@ mod integration_tests {
         };
 
         let mut rt = runtime();
-        let resolver = Resolver::new(Vec::new(), rt.executor()).unwrap();
+        let resolver = Resolver;
 
         rt.block_on(healthcheck(config, resolver).unwrap()).unwrap();
     }
 
     fn ensure_group(region: Region) {
         let mut rt = runtime();
-        let resolver = Resolver::new(Vec::new(), rt.executor()).unwrap();
+        let resolver = Resolver;
 
         let client = create_client(region, None, resolver).unwrap();
 

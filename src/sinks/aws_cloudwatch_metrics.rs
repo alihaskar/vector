@@ -272,7 +272,6 @@ mod tests {
     use super::*;
     use crate::dns::Resolver;
     use crate::event::metric::{Metric, MetricKind, MetricValue};
-    use crate::test_util::runtime;
     use chrono::offset::TimeZone;
     use pretty_assertions::assert_eq;
     use rusoto_cloudwatch::PutMetricDataInput;
@@ -286,8 +285,7 @@ mod tests {
     }
 
     fn svc() -> CloudWatchMetricsSvc {
-        let rt = runtime();
-        let resolver = Resolver::new(Vec::new(), rt.executor()).unwrap();
+        let resolver = Resolver;
         let config = config();
         let region = (&config.region).try_into().unwrap();
         let client = CloudWatchMetricsSvc::create_client(region, None, resolver).unwrap();
@@ -454,7 +452,7 @@ mod integration_tests {
     #[test]
     fn cloudwatch_metrics_healthchecks() {
         let mut rt = runtime();
-        let resolver = Resolver::new(Vec::new(), rt.executor()).unwrap();
+        let resolver = Resolver;
         let _ = rt.block_on_std(CloudWatchMetricsSvc::healthcheck(config(), resolver));
     }
 
